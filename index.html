@@ -1,0 +1,776 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+<div id="top_menu"
+     style="border: 1px solid #C0C0C0; padding: 2px; background-color: #EFFBCC;height:20px;line-height:20px;text-align:center;">
+    <div id="top_menu_m1" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="settdtitle();this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        设置标题
+    </div>
+    <div id="top_menu_m2" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="clsettdtitle();this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        取消标题
+    </div>
+    <div id="top_menu_m3" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="document.getElementById('jsontextxx').innerText=tabtojsonxx();this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        转为json数组
+    </div>
+    <div id="top_menu_m4" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="var awin=window.open('about:blank','newwindow','height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');awin.document.write(document.getElementById('jsontextxx').innerHTML);this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        查看json数组
+    </div>
+</div>
+
+<div id="tb_box"></div>
+<div style="width:0px; height:0px; display: none;"
+     id="jsontextxx"></div>
+
+</body>
+<script type="text/javascript">
+    function pdiellq() {
+        var Sys = {};
+        var ua = navigator.userAgent.toLowerCase();
+        var s;
+        (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+            (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+                (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                            (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+        if (Sys.ie) {
+            if (Sys.ie.toString() == "6.0") {
+                return 6;
+            } else if (Sys.ie.toString() == "7.0") {
+                return 7;
+            } else if (Sys.ie.toString() == "8.0") {
+                return 8;
+            } else if (Sys.ie.toString() == "9.0") {
+                return 9;
+            } else if (Sys.ie.toString() == "10.0") {
+                return 10;
+            } else if (Sys.ie.toString() == "11.0") {
+                return 11;
+            }
+        } else if (Sys.firefox) {
+            return 0;
+        } else if (Sys.chrome) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    function addCssByStyle(cssString) {
+        var doc = document;
+        var style = doc.createElement("style");
+        style.setAttribute("type", "text/css");
+
+        if (style.styleSheet) {// IE
+            style.styleSheet.cssText = cssString;
+        } else {// w3c
+            var cssText = doc.createTextNode(cssString);
+            style.appendChild(cssText);
+        }
+
+        var heads = doc.getElementsByTagName("head");
+        if (heads.length)
+            heads[0].appendChild(style);
+        else
+            doc.documentElement.appendChild(style);
+    }
+
+    //创建表格
+    function ct_table_m(nrboxid, ntbRows, ntbcolumns, tbwidth) {
+        var mzystyletxt = "*{font-family:arial;font-size:8pt}th{background-color:#efebde;border-right-width:1px;border-bottom-width:1px;border-right-style:solid;border-bottom-style:solid;border-right-color:#7e7d68;border-bottom-color:#7e7d68;font-weight:normal;color:black;height:24px;line-height:24px;cursor:default}td{border-right-width:1px;border-bottom-width:1px;border-top-style:none;border-right-style:solid;border-bottom-style:solid;border-left-style:none;border-right-color:#c0c0c0;border-bottom-color:#c0c0c0;cursor:text;padding:0}.noseld{background:transparent}.seld{background:#ecf9f9}.notitl{background:transparent}.yestitl{background:transparent;font-family:Arial Black;color:#00f;text-decoration:underline;font-style:italic;font-weight:bold;text-align:center}table{border:1px solid #7e7d68}input{width:100%;height:100%;border:0;margin:0;outline:0;padding:0}";
+        addCssByStyle(mzystyletxt);
+        var Mzy_table = document.createElement("table");
+        Mzy_table.id = "Mzy_Tb";
+        Mzy_table.border = 0;
+        Mzy_table.cellPadding = 0;
+        Mzy_table.width = (ntbcolumns * tbwidth) + 'px';
+        Mzy_table.cellSpacing = 0;
+        var Mzy_tbody = document.createElement("tbody");
+        Mzy_table.onkeydown = function () {
+            if (event.keyCode == 46) {
+                delseldygdata();
+            }
+        }
+
+        document.getElementById(nrboxid).appendChild(Mzy_table);
+        for (var row_i = 0; row_i <= ntbRows; row_i++) {
+            var Mzy_tr = document.createElement("tr");
+            var Mzy_td, Mzy_span;
+            Mzy_tbody.appendChild(Mzy_tr);
+            for (var colu_i = 0; colu_i <= ntbcolumns; colu_i++) {
+                if (row_i == 0) {
+                    Mzy_td = document.createElement("th");
+                    Mzy_td.id = "th_" + row_i + "_" + colu_i + "_t";
+                    Mzy_td.style.whiteSpace = "nowrap";
+                    Mzy_td.onselectstart = new Function("return false");
+                    if (colu_i > 0) {
+                        Mzy_td.onmouseup = function () {
+                            this.mouseDown = false;
+                        }
+                        Mzy_td.onmousemove = function () {
+                            SyDG_moveOnTd(this)
+                        }
+                        Mzy_td.onmousedown = function () {
+                            SyDG_downOnTd(this)
+                        }
+                        Mzy_td.onmouseout = function () {
+                            this.mouseDown = false;
+                        }
+                        Mzy_td.setAttribute("onclick", "getcolchanbjcolor(getRowCol(document.getElementById(\'Mzy_Tb\'),document.getElementById(\'th_" + row_i + "_" + colu_i + "_t\')))");
+                    }
+                    if (colu_i == 0 & row_i == 0) {
+                        Mzy_td.setAttribute("onclick", "selallbjcolor()");
+                    }
+                    Mzy_td.appendChild(document.createTextNode(gettitle(colu_i)));
+                } else {
+                    if (colu_i == 0) {
+                        Mzy_td = document.createElement("th");
+                        Mzy_td.id = "th_" + row_i + "_" + colu_i + "_t";
+                        Mzy_td.style.whiteSpace = "nowrap";
+                        Mzy_td.style.width = '20px';
+                        Mzy_td.onselectstart = new Function("return false");
+                        Mzy_td.appendChild(document.createTextNode(row_i));
+                        Mzy_td.setAttribute("onclick", "getrowchanbjcolor(getRowCol(document.getElementById(\'Mzy_Tb\'),document.getElementById(\'th_" + row_i + "_" + colu_i + "_t\')))");
+                    } else {
+                        Mzy_td = document.createElement("td");
+                        Mzy_td.id = "td_" + row_i + "_" + colu_i + "_t";
+                        Mzy_td.width = tbwidth + 'px';
+                        Mzy_input = document.createElement("input");
+                        Mzy_input.type = "text";
+                        Mzy_input.id = "input_" + row_i + "_" + colu_i + "_t";
+                        Mzy_input.className = 'notitl';
+                        Mzy_input.setAttribute('mzy_zt', '0|0|0|0');
+                        Mzy_input.onkeydown = function () {
+                            if (event.keyCode == 37) {
+                                gotonexv_X_l(this.id);
+                            }
+                            if (event.keyCode == 38) {
+                                gotonexv_Y_t(this.id);
+                            }
+                            if (event.keyCode == 39) {
+                                gotonexv_X_r(this.id);
+                            }
+                            if (event.keyCode == 40) {
+                                gotonexv_Y_d(this.id);
+                            }
+                        }
+                        Mzy_input.setAttribute('ondblclick', 'document.getElementById(\'' + Mzy_input.id + '\').title=document.getElementById(\'' + Mzy_input.id + '\').value;alert(document.getElementById(\'' + Mzy_input.id + '\').value);');
+                        Mzy_td.className = "noseld";
+                        Mzy_td.appendChild(Mzy_input);
+                        Mzy_td.onmousedown = function () {
+                            if (!event.shiftKey) {
+                                hfoldbjcolor();
+                                selemydygxx(this.id);
+                            } else {
+                                selemydygxx(this.id);
+                            }
+                            tbnrselectto();
+                        }
+                    }
+                }
+                Mzy_tr.appendChild(Mzy_td);
+            }
+        }
+        Mzy_table.appendChild(Mzy_tbody);
+    }
+
+    //选择目标单元格
+    function tbnrselectto() {
+        var isSelect = true;
+        document.getElementById("Mzy_Tb").onmousedown = function () {
+            if (event.ctrlKey) {
+                var selList = [];
+                var fileNodes = document.getElementsByTagName("input");
+                selList = fileNodes;
+
+                var evt = window.event || arguments[0];
+                var startX = (evt.x || evt.clientX);
+                var startY = (evt.y || evt.clientY);
+                var selDiv = document.createElement("div");
+                selDiv.style.cssText = "position:absolute;width:0px;height:0px;font-size:0px;margin:0px;padding:0px;border:1px dashed #0099FF;background-color:#C3D5ED;z-index:1000;filter:alpha(opacity:60);opacity:0.6;display:none;";
+                selDiv.id = "mzyselectDiv";
+                document.getElementById("tb_box").appendChild(selDiv);
+                selDiv.style.left = startX + "px";
+                selDiv.style.top = startY + "px";
+                var _x = null;
+                var _y = null;
+
+                document.getElementById("Mzy_Tb").onmousemove = function () {
+                    evt = window.event || arguments[0];
+                    if (isSelect && event.ctrlKey) {
+                        if (selDiv.style.display == "none") {
+                            selDiv.style.display = "";
+                        }
+                        _x = (evt.x || evt.clientX);
+                        _y = (evt.y || evt.clientY);
+                        if (_x < document.getElementById("Mzy_Tb").offsetWidth && _y < document.getElementById("Mzy_Tb").offsetHeight) {
+                            selDiv.style.left = Math.min(_x, startX) + "px";
+                            selDiv.style.top = Math.min(_y, startY) + "px";
+                            selDiv.style.width = Math.abs(_x - startX) + "px";
+                            selDiv.style.height = Math.abs(_y - startY) + "px";
+                        }
+                        // ---------------- 关键算法 ---------------------
+                        var _l = getElementLeft(selDiv), _t = getElementTop(selDiv);
+                        var _w = selDiv.offsetWidth, _h = selDiv.offsetHeight;
+                        for (var i = 0; i < selList.length; i++) {
+                            var vsl_obj = selList[i].parentNode;
+                            var sl = vsl_obj.offsetWidth + getElementLeft(vsl_obj);
+                            var st = vsl_obj.offsetHeight + getElementTop(vsl_obj);
+                            if (sl > _l && st > _t && getElementLeft(vsl_obj) < _l + _w && getElementTop(vsl_obj) < _t + _h) {
+                                if (vsl_obj.className == 'noseld') {
+                                    selemydygxx(vsl_obj.id);
+                                }
+                            } else {
+                                if (vsl_obj.className != 'seled') {
+                                    cselemydygxx(vsl_obj.id);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+        document.getElementById("Mzy_Tb").parentNode.onmouseup = function () {
+            isSelect = false;
+            if (document.getElementById('mzyselectDiv')) {
+                document.getElementById('tb_box').removeChild(document.getElementById('mzyselectDiv'));
+            }
+            selList = null, _x = null, _y = null, selDiv = null, startX = null, startY = null, evt = null;
+        }
+    }
+
+    //获取类excel表头序号的字符
+    function gettitle(numv) {
+        var tni = numv;
+        var tmi = 0;
+        var tm_str = '';
+        while (tni > 0) {
+            tmi = tni % 26;
+            tni = parseInt(tni / 26);
+            if (tmi == 0) {
+                tmi = 26;
+                tni--;
+            }
+            tm_str = String.fromCharCode(tmi + "A".charCodeAt(0) - 1) + tm_str;
+        }
+        return tm_str;
+    }
+
+    //执行粘贴监听
+    function intiTablePasteEvent() {
+        var tbl = document.getElementById("Mzy_Tb");
+        var rows = tbl.rows;
+        var cells;
+        for (var i = 0; i < rows.length; i++) {
+            cells = rows[i].cells;
+            for (var j = 0; j < cells.length; j++) {
+                var node = cells[j].getElementsByTagName("input");
+                if (!node || node.length <= 0) {
+                    node = cells[j].getElementsByTagName("textarea");
+                }
+                node = node[0]
+                if (node && node.tagName && (node.tagName.toUpperCase() == "INPUT" || node.tagName.toUpperCase() == "TEXTAREA")) {
+                    node.onpaste = function () {
+                        return doPaste(this);
+                    }
+                }
+            }
+        }
+    }
+
+    //执行粘贴
+    function doPaste(inputObj) {
+        var sfiebz = pdiellq();
+        if (sfiebz > 1) {
+            var txt = window.clipboardData.getData('text');//for IE
+        } else {
+            var txt = event.clipboardData.getData('text') || window.clipboardData.getData('text');
+        }
+
+        if (!txt) {
+            return false;
+        }
+        while (txt.length > 0) {
+            var c = txt.charAt(txt.length - 1);
+            if (c == '\n' || c == '\r' || c == '\t') {
+                txt = txt.substring(0, txt.length - 1);
+            } else {
+                break;
+            }
+        }
+        var pos = txt.indexOf("\n");
+        if (pos < 0) {
+            pos = txt.indexOf("\t");
+            if (pos < 0) return true;
+        }
+        var re = /\r/g;
+        txt = txt.replace(re, "");
+        var prows = txt.split("\n");
+        var data = new Array();
+        for (var i = 0; i < prows.length; i++) {
+            data[i] = prows[i].split("\t");
+        }
+        var tbl = getTable(inputObj);
+        var vTbl = createVTable(tbl);
+        var td = getTd(inputObj);
+        var rowcol = getRowCol(tbl, td);
+        var row = rowcol.row;
+        var col = rowcol.col;
+        var realCol = rowcol.realCol;
+        var rows = tbl.rows;
+        var cols, pcols, vtblCols;
+        for (var i = row, ii = 0; i < rows.length && ii < data.length; i++, ii++) {
+            cols = rows[i].cells;
+            pcols = data[ii];
+            vtblCols = vTbl[i];
+            for (var j = col, jj = 0, kk = realCol; j < cols.length && jj < pcols.length; jj++, kk++) {
+                if (vtblCols[kk] != "*") {
+                    var node = cols[j++].firstChild;
+                    if (node && node.tagName && (node.tagName.toUpperCase() == "INPUT" || node.tagName.toUpperCase() == "TEXTAREA")) {
+                        node.value.title = node.value = pcols[jj];
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //创建一个虚拟表格
+    function createVTable(tbl) {
+        var rows = tbl.rows;
+        var cells;
+        var rowColObj = getTblRowColNum(tbl);
+        var rowNum = rowColObj.rowNum;
+        var colNum = rowColObj.colNum;
+        var vTable = new Array(rowNum);
+        for (var i = 0; i < rowNum; i++) {
+            vTable[i] = new Array(colNum);
+        }
+        for (var i = 0; i < rows.length; i++) {
+            cells = rows[i].cells;
+            for (var j = 0; j < cells.length; j++) {
+                var colSpan = parseInt(cells[j].colSpan);
+                var rowSpan = parseInt(cells[j].rowSpan);
+                if (colSpan > 1 || rowSpan > 1) {
+                    for (var x = 0; x < rowSpan; x++) {
+                        for (var y = 0; y < colSpan; y++) {
+                            if (x == 0 && y == 0) {
+                                continue;
+                            } else {
+                                vTable[i + x][j + y] = "*";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return vTable;
+    }
+
+    //获取包容的input或textarea的Table
+    function getTable(inputObj) {
+        var node = inputObj;
+        while (node) {
+            if (node.tagName.toUpperCase() == "TABLE") {
+                break;
+            } else {
+                node = node.parentNode;
+            }
+        }
+        return node;
+    }
+
+    //获取包容的input或textarea的TD
+    function getTd(inputObj) {
+        var node = inputObj;
+        while (node) {
+            if (node.tagName.toUpperCase() == "TD") {
+                break;
+            } else {
+                node = node.parentNode;
+            }
+        }
+        return node;
+    }
+
+    //获取单元格所在的行列
+    function getRowCol(tbl, cell) {
+        var row = -1, col = -1;
+        var rows = tbl.rows;
+        var cells;
+        for (var i = 0; i < rows.length; i++) {
+            cells = rows[i].cells;
+            for (var j = 0; j < cells.length; j++) {
+                if (cells[j] == cell) {
+                    row = i;
+                    col = j;
+                    break;
+                }
+            }
+        }
+        var cells = tbl.rows[row].cells;
+        var colNum = 0;
+        for (var i = 0; i < col; i++) {
+            colNum += parseInt(cells[i].colSpan);
+        }
+        var obj = new Object();
+        obj.row = row;
+        obj.col = col;
+        obj.realCol = colNum;
+        return obj;
+    }
+
+    //获取表格的行数和列数
+    function getTblRowColNum(tbl) {
+        var rows = tbl.rows;
+        var rowNum = 0, colNum = 0;
+        rowNum = rows.length;
+        var tmp;
+        for (var i = 0; i < rows.length; i++) {
+            tmp = rows[i].cells.length;
+            if (colNum < tmp) {
+                colNum = tmp;
+            }
+        }
+        var obj = new Object();
+        obj.rowNum = rowNum;
+        obj.colNum = colNum;
+        return obj;
+    }
+
+    //选列变底色
+    function getcolchanbjcolor(hlarryv) {
+        var allcells = getTblRowColNum(document.getElementById('Mzy_Tb')).colNum;
+        var browonj;
+        if (!event.shiftKey) {
+            hfoldbjcolor();
+        }
+        for (var i = 1; i < allcells; i++) {
+            browonj = document.getElementById('Mzy_Tb').rows[i].cells[hlarryv.col];
+            browonj.className = "seld"
+        }
+    }
+
+    //选行变底色
+    function getrowchanbjcolor(hlarryv) {
+        var allrows = getTblRowColNum(document.getElementById('Mzy_Tb')).rowNum;
+        var browonj;
+        if (!event.shiftKey) {
+            hfoldbjcolor();
+        }
+        for (var i = 1; i < allrows; i++) {
+            browonj = document.getElementById('Mzy_Tb').rows[hlarryv.row].cells[i];
+            browonj.className = "seld"
+        }
+    }
+
+    //全部选择变底色
+    function selallbjcolor() {
+        var allcells = getTblRowColNum(document.getElementById('Mzy_Tb')).colNum;
+        var allrows = getTblRowColNum(document.getElementById('Mzy_Tb')).rowNum;
+        var browonj;
+        for (var ri = 1; ri < allrows; ri++) {
+            for (var ci = 1; ci < allcells; ci++) {
+                browonj = document.getElementById('Mzy_Tb').rows[ri].cells[ci];
+                browonj.className = "seld"
+            }
+        }
+    }
+
+    //表内背景色恢复
+    function hfoldbjcolor() {
+        var allcells = getTblRowColNum(document.getElementById('Mzy_Tb')).colNum;
+        var allrows = getTblRowColNum(document.getElementById('Mzy_Tb')).rowNum;
+        var browonj;
+        for (var ri = 1; ri < allrows; ri++) {
+            for (var ci = 1; ci < allcells; ci++) {
+                browonj = document.getElementById('Mzy_Tb').rows[ri].cells[ci];
+                if (browonj.className == "seld") {
+                    browonj.className = "noseld";
+                }
+
+            }
+        }
+    }
+
+
+    //单元格选择加底色
+    function selemydygxx(tdobjid) {
+        document.getElementById(tdobjid).className = "seld"
+    }
+
+    //单元格选择去底色
+    function cselemydygxx(tdobjid) {
+        document.getElementById(tdobjid).className = "noseld"
+    }
+
+    //鼠标拉动列宽
+    function SyDG_moveOnTd(td) {
+        if (event.offsetX > td.offsetWidth - 15)
+            td.style.cursor = 'w-resize';
+        else
+            td.style.cursor = 'default';
+        if (td.mouseDown != null && td.mouseDown == true) {
+            if (td.oldWidth + (event.x - td.oldX) > 0)
+                td.width = td.oldWidth + (event.x - td.oldX);
+            td.style.width = td.width;
+            td.style.cursor = 'w-resize';
+            table = td;
+            while (table.tagName != 'TABLE') table = table.parentElement;
+            table.width = td.tableWidth + (td.offsetWidth - td.oldWidth);
+            table.style.width = table.width;
+        }
+    }
+
+    function SyDG_downOnTd(td) {
+        if (event.offsetX > td.offsetWidth - 15) {
+            td.mouseDown = true;
+            td.oldX = event.x;
+            td.oldWidth = td.offsetWidth;
+            table = td;
+            while (table.tagName != 'TABLE') table = table.parentElement;
+            td.tableWidth = table.offsetWidth;
+        }
+    }
+
+
+    function getElementLeft(element) {
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+
+        while (current !== null) {
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+
+        return actualLeft;
+    }
+
+    function getElementTop(element) {
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+
+        while (current !== null) {
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+
+        return actualTop;
+    }
+
+    //将选定的单元格设置为标题单元
+    function settdtitle() {
+        var inputobja = document.getElementsByTagName('input');
+        for (var i = 0; i < inputobja.length; i++) {
+
+            if (inputobja[i].parentNode.className == 'seld') {
+
+                inputobja[i].className = 'yestitl';
+                xginputkzsxv(inputobja[i].id, 0, 1);
+            }
+        }
+    }
+
+    //取消标题单元设置
+    function clsettdtitle() {
+        var inputobja = document.getElementsByTagName('input');
+        for (var i = 0; i < inputobja.length; i++) {
+            if (inputobja[i].parentNode.className == 'seld') {
+                inputobja[i].className = 'notitl';
+                xginputkzsxv(inputobja[i].id, 0, 0);
+            }
+        }
+    }
+
+
+    //光标操作，向下
+    function gotonexv_Y_d(oldjbid1) {
+        var strs1 = oldjbid1.split("_"); //字符分割
+        if (parseInt(strs1[1]) < getTblRowColNum(document.getElementById('Mzy_Tb')).rowNum - 1) {
+            var nxxid1 = "input_" + (parseInt(strs1[1]) + 1) + "_" + strs1[2] + "_t";
+            if (!event.shiftKey) {
+                hfoldbjcolor();
+                selemydygxx(document.getElementById(nxxid1).parentNode.id);
+                document.getElementById(nxxid1).focus();
+            } else {
+                selemydygxx(document.getElementById(nxxid1).parentNode.id);
+                document.getElementById(nxxid1).focus();
+            }
+        }
+    }
+
+    //光标操作，向上
+    function gotonexv_Y_t(oldjbid) {
+        var strs = oldjbid.split("_"); //字符分割
+        if (parseInt(strs[1]) >= 2) {
+            var nxxid = "input_" + (parseInt(strs[1]) - 1) + "_" + strs[2] + "_t";
+            if (!event.shiftKey) {
+                hfoldbjcolor();
+                selemydygxx(document.getElementById(nxxid).parentNode.id);
+                document.getElementById(nxxid).focus();
+            } else {
+                selemydygxx(document.getElementById(nxxid).parentNode.id);
+                document.getElementById(nxxid).focus();
+            }
+        }
+    }
+
+    //光标操作，向左
+    function gotonexv_X_l(oldjbid) {
+        var strs = oldjbid.split("_"); //字符分割
+        if (parseInt(strs[2]) >= 2) {
+            var nxxid = "input_" + strs[1] + "_" + (parseInt(strs[2]) - 1) + "_t";
+            if (!event.shiftKey) {
+                hfoldbjcolor();
+                selemydygxx(document.getElementById(nxxid).parentNode.id);
+                document.getElementById(nxxid).focus();
+            } else {
+                selemydygxx(document.getElementById(nxxid).parentNode.id);
+                document.getElementById(nxxid).focus();
+            }
+        }
+    }
+
+    //光标操作，向右
+    function gotonexv_X_r(oldjbid) {
+        var strs = oldjbid.split("_"); //字符分割
+        if (parseInt(strs[2]) < getTblRowColNum(document.getElementById('Mzy_Tb')).colNum - 1) {
+            var nxxid = "input_" + strs[1] + "_" + (parseInt(strs[2]) + 1) + "_t";
+            if (!event.shiftKey) {
+                hfoldbjcolor();
+                selemydygxx(document.getElementById(nxxid).parentNode.id);
+                document.getElementById(nxxid).focus();
+            } else {
+                selemydygxx(document.getElementById(nxxid).parentNode.id);
+                document.getElementById(nxxid).focus();
+            }
+        }
+    }
+
+    //删除数据
+    function delseldygdata() {
+        var inputobja = document.getElementsByTagName('input');
+        for (var i = 0; i < inputobja.length; i++) {
+            if (inputobja[i].parentNode.className == 'seld') {
+                inputobja[i].value = '';
+            }
+        }
+    }
+
+    //获取input的自定义属性
+    function getinputkzsxv(objid, zlx) {
+        var inputobja = document.getElementById(objid);
+        var tmpxx = inputobja.getAttribute('mzy_zt').split("|"); //字符分割
+        return tmpxx[zlx];
+    }
+
+    //修改input的自定义属性
+    function xginputkzsxv(objid, zlx, lxv) {
+        var inputobja = document.getElementById(objid);
+        var tmpxx = inputobja.getAttribute('mzy_zt').split("|"); //字符分割
+        var ntempxx = new Array();
+        for (var i = 0; i < 4; i++) {
+            if (i == zlx) {
+                ntempxx[i] = lxv
+            } else {
+                ntempxx[i] = tmpxx[i]
+            }
+        }
+        inputobja.setAttribute('mzy_zt', ntempxx);
+    }
+
+    //删除最后多余的分割符
+    function qhmrfh(strtxt, yqdfh) {
+        var newstrtxt;
+        if (strtxt.substr(strtxt.length - 1, 1) == yqdfh) {
+            newstrtxt = strtxt.substr(0, strtxt.length - 1);
+        }
+        return newstrtxt;
+    }
+
+    //转为json数组格式
+    function tabtojsonxx() {
+        var tmptxt = '', tmpa = '', tmpb = '';
+        var zbxx_x = 1, zbxx_y = 1;
+        var dtdivid = '';
+        var inputobja = document.getElementsByTagName('input');
+        var hxmaxi = getTblRowColNum(document.getElementById('Mzy_Tb')).colNum;
+        var zxmaxi = getTblRowColNum(document.getElementById('Mzy_Tb')).rowNum;
+        //纵向
+        for (zbxx_y = 1; zbxx_y < zxmaxi; zbxx_y++) {
+            for (zbxx_x = 1; zbxx_x < hxmaxi - 1; zbxx_x++) {
+                dtdivid = "input_" + zbxx_y + "_" + zbxx_x + "_t";
+                if (document.getElementById(dtdivid).className == 'yestitl') {
+                    for (var ti = zbxx_x; ti < hxmaxi; ti++) {
+                        var adtdivid = "input_" + zbxx_y + "_" + ti + "_t";
+                        if (document.getElementById(adtdivid).className == 'yestitl') {
+                            tmpa = tmpa + document.getElementById(adtdivid).value;
+                        } else {
+                            if (document.getElementById(adtdivid).value != '') {
+                                tmpb = tmpb + '\"' + document.getElementById(adtdivid).value + '\",';
+                            }
+                        }
+                    }
+                    if (tmpb != '') {
+                        tmpb = qhmrfh(tmpb, ',');
+                        tmptxt = tmptxt + '\"' + tmpa + '\":[' + tmpb + ']\,';
+                    }
+                    tmpa = '';
+                    tmpb = '';
+                }
+            }
+        }
+        //横向
+        for (zbxx_x = 1; zbxx_x < hxmaxi; zbxx_x++) {
+            for (zbxx_y = 1; zbxx_y < zxmaxi; zbxx_y++) {
+                dtdivid = "input_" + zbxx_y + "_" + zbxx_x + "_t";
+                if (document.getElementById(dtdivid).className == 'yestitl') {
+                    for (var ti = zbxx_y; ti < zxmaxi; ti++) {
+                        dtdivid = "input_" + ti + "_" + zbxx_x + "_t";
+                        if (document.getElementById(dtdivid).className == 'yestitl') {
+                            tmpa = tmpa + document.getElementById(dtdivid).value;
+                        } else {
+                            if (document.getElementById(dtdivid).value != '') {
+                                tmpb = tmpb + '\"' + document.getElementById(dtdivid).value + '\",';
+                            }
+                        }
+                    }
+                    if (tmpb != '') {
+                        tmpb = qhmrfh(tmpb, ',');
+                        tmptxt = tmptxt + '\"' + tmpa + '\":[' + tmpb + ']\,';
+                    }
+                    tmpa = '';
+                    tmpb = '';
+                }
+
+            }
+        }
+        tmptxt = qhmrfh(tmptxt, ',');
+        return '\{' + tmptxt + '\}';
+    }
+</script>
+
+<script type="text/javascript">
+    ct_table_m('tb_box', 10, 12, 100);
+    window.onload = intiTablePasteEvent;
+</script>
+</html>
