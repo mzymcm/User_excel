@@ -1,46 +1,792 @@
-<!DOCTYPE html><html><head>    <meta charset="utf-8">    <meta http-equiv="X-UA-Compatible" content="IE=edge"></head>
-<body><div id="top_menu"     style="border: 1px solid #C0C0C0; padding: 2px; background-color: #EFFBCC;height:20px;line-height:20px;text-align:center;">    <div id="top_menu_m1" onmousemove="this.style.backgroundColor = '#F4FFFE';"         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"         onmousedown="settdtitle();this.style.backgroundColor = '#FFFFCA';"         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">        设置标题    </div>    <div id="top_menu_m2" onmousemove="this.style.backgroundColor = '#F4FFFE';"         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"         onmousedown="clsettdtitle();this.style.backgroundColor = '#FFFFCA';"         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">        取消标题    </div>    <div id="top_menu_m3" onmousemove="this.style.backgroundColor = '#F4FFFE';"         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"         onmousedown="document.getElementById('jsontextxx').innerText=tabtojsonxx();this.style.backgroundColor = '#FFFFCA';"         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">        转为json数组    </div>    <div id="top_menu_m4" onmousemove="this.style.backgroundColor = '#F4FFFE';"         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"         onmousedown="var awin=window.open('about:blank','newwindow','height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');awin.document.write(document.getElementById('jsontextxx').innerHTML);this.style.backgroundColor = '#FFFFCA';"         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">        查看json数组    </div></div><div style="width:0px; height:0px; display: none;" id="jsontextxx"></div><div id="tb_box"></div>
-</body><script type="text/javascript" language="JavaScript">    function pdiellq() {        //测试浏览器类型        var Sys = {};        var ua = navigator.userAgent.toLowerCase();        var s;        (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :            (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :                (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :                    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :                        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :                            (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;        if (Sys.ie) {            if (Sys.ie.toString() == "6.0") {                return 6;            } else if (Sys.ie.toString() == "7.0") {                return 7;            } else if (Sys.ie.toString() == "8.0") {                return 8;            } else if (Sys.ie.toString() == "9.0") {                return 9;            } else if (Sys.ie.toString() == "10.0") {                return 10;            } else if (Sys.ie.toString() == "11.0") {                return 11;            }        } else if (Sys.firefox) {            return 0;        } else if (Sys.chrome) {            return 1;        } else {            return -1;        }    }
-    function MzyCrycprydiv() {        //画公用的隐藏层        var selDiv = document.createElement("div");        selDiv.style.cssText = "position: absolute; width: 0px; height: 0px; z-index: 999; left: 0px; top: 0px;margin:0px 0px 0px 0px;padding:0px;border-style: solid; border-width: 1px; background-color: #ECF9F9;word-wrap:break-word;justify-content:center;align-items:center;";        selDiv.id = "Mzy_sel_Div";        selDiv.style.display = 'none';        var selDisInput = document.createElement("div");        selDisInput.id = "Mzy_input";        selDisInput.style.cssText = 'position: absolute;top:0px;left:0px;margin:0px;padding:0px;width:100%;height:100%;';        selDisInput.setAttribute('contenteditable', 'true');        var selDisSbz = document.createElement("div");        selDisSbz.style.cssText = 'position:absolute;right:0px;bottom:0px;margin:0px 0px -1px 0px;padding:0px;cursor:crosshair;';        selDisSbz.id = 'Mzy_div_selbz';        selDisSbz.appendChild(document.createTextNode('◢'));        selDisSbz.onmousedown = function () {            MzySelnrhk(document.getElementById('Mzy_input').getAttribute('td_id'));        }        selDiv.appendChild(selDisInput);        selDiv.appendChild(selDisSbz);        document.getElementById("tb_box").appendChild(selDiv);        var puarraybox = document.createElement("textarea");        puarraybox.id = 'Pub_arr_strs';        puarraybox.setAttribute('hidden', 'hidden');        puarraybox.style.display = 'none';        document.getElementById("tb_box").appendChild(puarraybox);        var Tzlkzydiv = document.createElement("div");        Tzlkzydiv.id = "Mzy_Tzlkzydiv";        Tzlkzydiv.style.cssText = 'position: relative; width:0px; height:0px; z-index:90; float:right;margin:0px 0px 0px 0px;padding:0px;background-color: #808080;-moz-user-select:none;cursor:default;';        Tzlkzydiv.setAttribute('unselectable', 'on');        Tzlkzydiv.setAttribute('onselectstart', 'return false;');        document.getElementById("tb_box").appendChild(Tzlkzydiv);    }
-    function MzySelnrhk(jobid) {        var Mzy_inputbox = document.getElementById('Mzy_sel_Div');        Mzy_inputbox.style.filter = 'alpha(opacity:60)';        Mzy_inputbox.style.opacity = 0.6;        var maindiv = document.getElementById(jobid).parentNode.parentNode;        maindiv.onmousemove = function () {            MzySelnrhkMove(jobid);        }        Mzy_inputbox.onmouseup = function () {            var sel_Y_0 = parseInt(Mzy_inputbox.style.top);            var sel_Y_1 = parseInt(Mzy_inputbox.style.top) + parseInt(Mzy_inputbox.style.height) + parseInt(Mzy_inputbox.style.borderBottomWidth) + parseInt(Mzy_inputbox.style.borderTopWidth);            var sel_X_0 = parseInt(Mzy_inputbox.style.left);            var sel_X_1 = parseInt(Mzy_inputbox.style.left) + parseInt(Mzy_inputbox.style.width) + parseInt(Mzy_inputbox.style.borderLeftWidth) + parseInt(Mzy_inputbox.style.borderRightWidth);            maindiv.onmousemove = null;            maindiv.onmouseup = null;            Mzy_inputbox.style.top = '0px';            Mzy_inputbox.style.left = '0px';            Mzy_inputbox.style.width = '0px';            Mzy_inputbox.style.height = '0px';            Mzy_inputbox.style.display = 'none';        }    }
-    function MzySetinputbox(jobid) {        var Mzy_inputbox = document.getElementById('Mzy_sel_Div');        var Mzy_inputbox_input = document.getElementById('Mzy_input');        var stridxx = jobid.split("_");        if (parseInt(stridxx[1]) > 0 && parseInt(stridxx[2]) > 0) {            Mzy_inputbox.style.top = getElementTop(document.getElementById(jobid)) + 'px';            Mzy_inputbox.style.left = getElementLeft(document.getElementById(jobid)) + 'px';            Mzy_inputbox.style.width = (document.getElementById(jobid).offsetWidth - 2) + 'px';            Mzy_inputbox.style.height = (document.getElementById(jobid).offsetHeight - 2) + 'px';            Mzy_inputbox.style.display = Mzy_inputbox.parentNode.style.display;            Mzy_inputbox.style.filter = Mzy_inputbox.parentNode.style.filter;            Mzy_inputbox.style.opacity = Mzy_inputbox.parentNode.style.opacity;            Mzy_inputbox.style.fontSize = Mzy_inputbox.parentNode.style.fontSize;            Mzy_inputbox_input.style.width = (document.getElementById(jobid).offsetWidth - 2) + 'px';            Mzy_inputbox_input.style.height = (document.getElementById(jobid).offsetHeight - 2) + 'px';            Mzy_inputbox_input.style.display = Mzy_inputbox.parentNode.style.display;            Mzy_inputbox_input.setAttribute('td_id', jobid);            tdnrselRead(jobid);            Mzy_inputbox_input.focus();            Mzy_inputbox_input.onpaste = function () {                if (document.all) {                    window.event.returnValue = false;                } else {                    event.preventDefault();                }                intiTablePasteEvent();            }            Mzy_inputbox_input.onkeydown = function () {                var kzkeyarray = [36, 37, 38, 39, 40, 46];                if (jcarrayzv(kzkeyarray, event.keyCode)) {                    document.getElementById(jobid).innerHTML = Mzy_inputbox_input.innerHTML;                    Mzy_inputbox.style.display = '';                    document.getElementById(jobid).setAttribute('td_input', '0');                    MzySetinputbox_keyopr(jobid);                }            }            if (document.getElementById(jobid).getAttribute('td_input') == '0') {                Mzy_inputbox_input.innerHTML = document.getElementById(jobid).innerHTML;                document.getElementById(jobid).setAttribute('td_input', '1');                Mzy_inputbox_input.onblur = function () {                    document.getElementById(jobid).innerHTML = Mzy_inputbox_input.innerHTML;                    Mzy_inputbox_input.style.display = 'none';                    document.getElementById(jobid).setAttribute('td_input', '0');                }            }        } else {            Mzy_inputbox_input.style.display = '';        }    }
-    function MzySetinputbox_keyopr(jobidn) {        //列数        var Tb_allcols = gettbhlxx('Mzy_excelTable', 'col');        //行数        var Tb_allrows = gettbhlxx('Mzy_excelTable', 'row');        var strs1 = jobidn.split("_");        //向下        if (event.keyCode == 40) {            if (parseInt(strs1[1]) < Tb_allcols) {                var nxxid1 = "td_" + (parseInt(strs1[1]) + 1) + "_" + parseInt(strs1[2]);                MzySetinputbox(nxxid1);            }        }        //向右        if (event.keyCode == 39) {            if (parseInt(strs1[2]) < Tb_allrows) {                var nxxid1 = "td_" + parseInt(strs1[1]) + "_" + (parseInt(strs1[2]) + 1);                MzySetinputbox(nxxid1);            }        }        //向上        if (event.keyCode == 38) {            if (parseInt(strs1[1]) > 0) {                var nxxid1 = "td_" + (parseInt(strs1[1]) - 1) + "_" + parseInt(strs1[2]);                MzySetinputbox(nxxid1);            }        }        //向左        if (event.keyCode == 37) {            if (parseInt(strs1[2]) > 0) {                var nxxid1 = "td_" + parseInt(strs1[1]) + "_" + (parseInt(strs1[2]) - 1);                MzySetinputbox(nxxid1);            }        }        //删除键        if (event.keyCode == 46) {            document.getElementById(jobidn).innerHTML = '';            MzySetinputbox(jobidn);        }        if ((event.ctrlKey) && (event.keyCode == 36)) {            MzySetinputbox("td_1_1");        }    }
-    function MzySelnrhkMove(jobid) {        var Mzy_inputbox = document.getElementById('Mzy_sel_Div');        Mzy_inputbox.style.top = getElementTop(document.getElementById(jobid)) + 'px';        Mzy_inputbox.style.left = getElementLeft(document.getElementById(jobid)) + 'px';        Mzy_inputbox.style.width = (document.getElementById(jobid).offsetWidth - 2) + 'px';        Mzy_inputbox.style.height = (document.getElementById(jobid).offsetHeight - 2) + 'px';        Mzy_inputbox.style.display = '';        var evt = window.event || arguments[0];        var startX = parseInt(Mzy_inputbox.style.left);        var startY = parseInt(Mzy_inputbox.style.top);        var _x = null;        var _y = null;        _x = (evt.x || evt.clientX);        _y = (evt.y || evt.clientY);        var thebgmaxwidth = document.getElementById("Mzy_excelTable").offsetWidth;        var thebgmaxheight = document.getElementById("Mzy_excelTable").offsetHeight;        if (_x < thebgmaxwidth && _y < thebgmaxheight) {            Mzy_inputbox.style.left = Math.min(_x, startX) + "px";            Mzy_inputbox.style.top = Math.min(_y, startY) + "px";            Mzy_inputbox.style.width = Math.abs(_x - startX) + "px";            Mzy_inputbox.style.height = Math.abs(_y - startY) + "px";        }    }
-    function getElementLeft(element) {        var actualLeft = element.offsetLeft;        var current = element.offsetParent;        while (current !== null) {            actualLeft += parseInt(current.offsetLeft) + parseInt(current.style.borderLeftWidth | current.border) + parseInt(current.style.borderRightWidth | current.border);            current = current.offsetParent;        }        return actualLeft;    }
-    function getElementTop(element) {        var actualTop = element.offsetTop;        var current = element.offsetParent;        while (current !== null) {            actualTop += parseInt(current.offsetTop) + parseInt(current.style.borderTopWidth | current.border) + parseInt(current.style.borderBottomWidth | current.border);            current = current.offsetParent;        }        return actualTop;    }
-    //检测数组中是否有要查的数    function jcarrayzv(arraynu, mbnu) {        var zdbz = 0;        for (var i = 0; i < arraynu.length; i++) {            if (arraynu[i] == mbnu) {                zdbz++;                break;            }        }        if (zdbz > 0) {            return true;        } else {            return false;        }    }
-    //====== 画表格专用函数 ======== Begin //    function MzyCreateTable(rqdivid, rowNums, colNums, rowWidths) {        addCssByStyle();        MzyCrycprydiv();        var Mzy_table = document.createElement("table");        Mzy_table.id = "Mzy_excelTable";        Mzy_table.border = 0;        Mzy_table.cellPadding = 0;        Mzy_table.style.width = (colNums * rowWidths) + 'px';        Mzy_table.cellSpacing = 0;        document.getElementById(rqdivid).appendChild(Mzy_table);        for (ri = 0; ri < colNums; ri++) {            var Mzy_tr = document.createElement("tr");            Mzy_tr.id = 'tr_' + ri;            Mzy_table.appendChild(Mzy_tr);            for (ci = 0; ci < rowNums; ci++) {                var td_lx_pd = 0;                var tdmc = 'td';                var tdwnu = rowWidths;                var tdvalue = '';                if (ri < 1 || ci < 1) {                    td_lx_pd = 1;                    tdmc = 'th';                    if (ci == 0) {                        tdwnu = 20;                    }                }                if (ri == 0 && ci > 0) {                    tdvalue = MzyGettitle(ci);                }                if (ri > 0 && ci == 0) {                    tdvalue = ri;                }                var Mzy_td = document.createElement(tdmc);                Mzy_td.id = tdmc + '_' + ri + '_' + ci;                Mzy_td.style.width = tdwnu + 'px';                Mzy_td.setAttribute('td_lx', td_lx_pd);                Mzy_td.setAttribute('td_input', '0');                Mzy_td.setAttribute('td_oprsy', '0');                if (ri == 0 && ci > 0) {                    //鼠标拉动列宽                    var Mzy_titdivtd = document.createElement('div');                    Mzy_titdivtd.style.cssText = 'float: left;width:99.9%;text-align:center;-moz-user-select:none;';                    Mzy_titdivtd.id = 'toptitlebox' + ri + '_' + ci;                    Mzy_td.appendChild(Mzy_titdivtd);                    var Mzy_titdivtd_mu = document.createElement('div');                    Mzy_titdivtd_mu.style.cssText = 'width:0.1%;float:right;cursor:w-resize;filter:alpha(opacity:0);opacity:0;-moz-user-select:none;';                    Mzy_titdivtd_mu.id = 'titmubs' + ri + '_' + ci;                    Mzy_titdivtd_mu.appendChild(document.createTextNode('|'));                    Mzy_titdivtd.setAttribute('unselectable', 'on');                    Mzy_titdivtd.setAttribute('onselectstart', 'return false;');                    Mzy_titdivtd_mu.setAttribute('unselectable', 'on');                    Mzy_titdivtd_mu.setAttribute('onselectstart', 'return false;');                    Mzy_td.appendChild(Mzy_titdivtd_mu);                    Mzy_titdivtd_mu.setAttribute('onmousedown', 'chancolwidthread(this.parentNode.id)');                }                Mzy_td.onclick = function () {                    //选择表单元格                    MzySetinputbox(this.id);                }                if (ri > 0 && ci > 0) {                    Mzy_td.onmousemove = function () {                        tdnrselRead(this.id);                    }                    Mzy_td.onmousedown = function () {                        tdnrselReadDown(this.id);                    }                    Mzy_td.onmouseup = function () {                        qxbz++;                    }                }                if (ri == 0 && ci > 0) {                    Mzy_titdivtd.appendChild(document.createTextNode(tdvalue));                } else {                    Mzy_td.appendChild(document.createTextNode(tdvalue));                }                Mzy_tr.appendChild(Mzy_td);            }        }    }
-    var zbgzzt = 0;
-    function chancolwidthread(tobjid) {        var zbgzzt = 1;        Puydcgl(tobjid);        document.body.onmousemove = function () {            if (zbgzzt == 1) {                document.getElementById('Mzy_Tzlkzydiv').style.cursor = 'w-resize';                MzyLKLdmove();            }        }        document.body.onmouseup = function () {            if (zbgzzt == 1) {                document.getElementById('Mzy_Tzlkzydiv').style.cursor = 'default';                MzyLKLdup(tobjid);                zbgzzt = 0;            }        }    }
-    function Puydcgl(mbobjid) {        //运动层管理        var old_top, old_left, old_width, old_height;        old_top = getElementTop(document.getElementById(mbobjid));        old_left = getElementLeft(document.getElementById(mbobjid));        old_width = document.getElementById(mbobjid).offsetWidth;        old_height = document.getElementById(mbobjid).offsetHeight;        document.getElementById('Mzy_Tzlkzydiv').style.top = old_top + 'px';        document.getElementById('Mzy_Tzlkzydiv').style.left = old_left + 'px';        document.getElementById('Mzy_Tzlkzydiv').style.width = old_width + 'px';        document.getElementById('Mzy_Tzlkzydiv').style.height = old_height + 'px';        document.getElementById('Mzy_Tzlkzydiv').style.position = 'absolute';        document.getElementById('Mzy_Tzlkzydiv').style.backgroundColor = '#808080';        document.getElementById('Mzy_Tzlkzydiv').style.filter = 'alpha(opacity:60)';        document.getElementById('Mzy_Tzlkzydiv').style.opacity = 0.6;        document.getElementById('Mzy_Tzlkzydiv').style.display = '';        document.getElementById('Mzy_sel_Div').style.display = 'none';    }
-    function MzyLKLdmove() {        var oldleft = getElementLeft(document.getElementById('Mzy_Tzlkzydiv'));        var evt = window.event || arguments[0];        var mov_x = (evt.x || evt.clientX);        if (!mov_x) {            return false;        }        nwid = (parseInt(mov_x) - parseInt(oldleft));        if (nwid < 0) {            nwid = parseInt(document.getElementById('Mzy_Tzlkzydiv').offsetWidth);        }        document.getElementById('Mzy_Tzlkzydiv').style.width = nwid + 'px';    }
-    function MzyLKLdup(mbobjid) {        var sjobj = document.getElementById(mbobjid);        var oldtdwidth = sjobj.offsetWidth;        var zjorjsv = parseInt(document.getElementById('Mzy_Tzlkzydiv').style.width) - parseInt(oldtdwidth);        var maintabwidthold = parseInt(document.getElementById('Mzy_excelTable').offsetWidth);        sjobj.style.width = parseInt(document.getElementById('Mzy_Tzlkzydiv').style.width) + 'px';        document.getElementById('Mzy_excelTable').style.width = (maintabwidthold + zjorjsv) + 'px';        document.getElementById('Mzy_Tzlkzydiv').style.top = '0px';        document.getElementById('Mzy_Tzlkzydiv').style.left = '0px';        document.getElementById('Mzy_Tzlkzydiv').style.width = '0px';        document.getElementById('Mzy_Tzlkzydiv').style.display = 'none';    }
-    //表格专用样式生成    function addCssByStyle() {        var Mzy_tbstyle_str = "*{font-family:arial;font-size:8pt;margin:0px 0px 0px 0px;padding:0px;}\n" +            "table{border:1px solid #7e7d68;margin-right:-1000px;}\n" +            "th{background-color:#efebde;border-right-width:1px;border-bottom-width:1px;border-right-style:solid;border-bottom-style:solid;border-right-color:#7e7d68;border-bottom-color:#7e7d68;font-weight:normal;color:black;height:24px;line-height:24px;cursor:default}\n" +            "td{border-right-width:1px;border-bottom-width:1px;border-top-style:none;border-right-style:solid;border-bottom-style:solid;border-left-style:none;border-right-color:#c0c0c0;border-bottom-color:#c0c0c0;cursor:text;padding:0;}\n" +            ".seld{border: 1px ridge #EEEEEE;background: #ecf9f9;}\n" +            "\n";        var doc = document;        var style = doc.createElement("style");        style.setAttribute("type", "text/css");        if (style.styleSheet) {// IE            style.styleSheet.cssText = Mzy_tbstyle_str;        } else {// w3c            var cssText = doc.createTextNode(Mzy_tbstyle_str);            style.appendChild(cssText);        }        var heads = doc.getElementsByTagName("head");        if (heads.length)            heads[0].appendChild(style);        else            doc.documentElement.appendChild(style);    }
-    //获取类excel表头序号的字符    function MzyGettitle(numv) {        var tni = numv;        var tmi = 0;        var tm_str = '';        while (tni > 0) {            tmi = tni % 26;            tni = parseInt(tni / 26);            if (tmi == 0) {                tmi = 26;                tni--;            }            tm_str = String.fromCharCode(tmi + "A".charCodeAt(0) - 1) + tm_str;        }        return tm_str;    }
-    //获取表格内容里的行数和列数    function gettbhlxx(tbid, lx) {
-        if (lx == 'col') {            //取表列数            return document.getElementById(tbid).getElementsByTagName('tr').length - 1;        }
-        if (lx == 'row') {            //取表行数            return document.getElementById(tbid).getElementsByTagName('tr')[1].getElementsByTagName('td').length;        }    }
-    //执行粘贴监听    function intiTablePasteEvent() {        var sfiebz = pdiellq();        if (sfiebz > 1) {            var txt = window.clipboardData.getData('text');//for IE        } else {            var txt = event.clipboardData.getData('text') || window.clipboardData.getData('text');        }
-        if (!txt) {            return false;        }        while (txt.length > 0) {            var c = txt.charAt(txt.length - 1);            if (c == '\n' || c == '\r' || c == '\t') {                txt = txt.substring(0, txt.length - 1);            } else {                break;            }        }        var pos = txt.indexOf("\n");        if (pos < 0) {            pos = txt.indexOf("\t");            if (pos < 0) return true;        }        var re = /\r/g;        txt = txt.replace(re, "");        var prows = txt.split("\n");        var data = new Array();        for (var i = 0; i < prows.length; i++) {            data[i] = prows[i].split("\t");        }        var stridxx = document.getElementById('Mzy_input').getAttribute('td_id').split("_");        var csh_row = stridxx[1];        var csh_col = stridxx[2];        var tbg_cols = gettbhlxx('Mzy_excelTable', 'row');        var tbg_rows = gettbhlxx('Mzy_excelTable', 'col');        document.getElementById('Mzy_input').innerHTML = data[0][0];        document.getElementById('Mzy_sel_Div').style.display = 'none';        for (var rii = 0, ri = csh_row; rii < data.length && ri <= tbg_rows; rii++, ri++) {            for (var cii = 0, ci = csh_col; cii < data[0].length && ci <= tbg_cols; cii++, ci++) {                document.getElementById('td_' + ri + '_' + ci).innerHTML = data[rii][cii];            }        }    }
-    //====== 画表格专用函数 ======== End //
-    //====== 表格单元格操作内存控制 ======== begin //    var p_x = new Array();    var p_y = new Array();    var tmp_pub_array = new Array();    var tmp_title_array = new Array();    var tmp_Table_array = new Array();    var qxbz = 1;
-    function tdnrselRead(objid) {        if (qxbz < 1) {            document.getElementById('Mzy_sel_Div').style.display = 'none';            Mzyjldzarray(objid);            hxzrtd();        }    }
-    function tdnrselReadDown(objid) {        qxbz = 0;        if (!event.ctrlKey) {            clyhxx();            p_x.splice(0, p_x.length);            p_y.splice(0, p_y.length);        }        Mzyjlddxar(objid);        document.getElementById(objid).className = 'seld';    }
-    function Mzyjldzarray(objid) {        var tepstra = objid.split("_");        if (p_x.indexOf(tepstra[1]) < 0) {            p_x.push(tepstra[1]);        }        if (p_y.indexOf(tepstra[2]) < 0) {            p_y.push(tepstra[2]);        }        if (parseInt(tepstra[1]) < p_x.max()) {            clyhxx();            p_x.removeByValue(p_x.max());        }        if (parseInt(tepstra[2]) < p_y.max()) {            clyhxx();            p_y.removeByValue(p_y.max());        }    }
-    function Mzyjlddxar(objid) {        var tepstra = objid.split("_");        if (p_x.indexOf(tepstra[1]) < 0) {            p_x.push(tepstra[1]);        }        if (p_y.indexOf(tepstra[2]) < 0) {            p_y.push(tepstra[2]);        }    }
-    function clyhxx() {        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {                document.getElementById('td_' + ri + '_' + ci).className = '';            }        }
-    }
-    Array.prototype.removeByValue = function (val) {        for (var i = 0; i < this.length; i++) {            if (this[i] == val) {                this.splice(i, 1);                break;            }        }    }    Array.prototype.max = function () {        return Math.max.apply({}, this)    }    Array.prototype.min = function () {        return Math.min.apply({}, this)    }
-    function hxzrtd() {        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {                document.getElementById('td_' + ri + '_' + ci).className = 'seld';            }        }    }
-    if (!Array.prototype.indexOf) {        Array.prototype.indexOf = function (searchElement, fromIndex) {            var k;            if (this == null) {                throw new TypeError('"this" is null or not defined');            }            var O = Object(this);            var len = O.length >>> 0;            if (len === 0) {                return -1;            }            var n = +fromIndex || 0;            if (Math.abs(n) === Infinity) {                n = 0;            }            if (n >= len) {                return -1;            }            k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);            while (k < len) {                if (k in O && O[k] === searchElement) {                    return k;                }                k++;            }            return -1;        };    }
-    //====== 表格单元格操作内存控制 ======== end //
-    //将选定的单元格设置为标题单元    function settdtitle() {        tmp_pub_array.splice(0, tmp_pub_array.length);        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {                tmp_pub_array.push('td_' + ri + '_' + ci);            }        }        settdtitle_crcolor();        tmp_title_array.push(tmp_pub_array);    }
-    //为选定的单元格设置样式    function settdtitle_crcolor() {        for (var i = 0; i < tmp_pub_array.length; i++) {            document.getElementById(tmp_pub_array[i]).style.fontFamily = 'Arial Black';            document.getElementById(tmp_pub_array[i]).style.color = '#CC3300';            document.getElementById(tmp_pub_array[i]).style.fontStyle = 'oblique';            document.getElementById(tmp_pub_array[i]).style.borderBottom = '2px dotted #FF0000';            document.getElementById(tmp_pub_array[i]).setAttribute('td_oprsy', '9');        }    }
-    //取消标题单元设置    function clsettdtitle() {        tmp_pub_array.splice(0, tmp_pub_array.length);        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {                tmp_pub_array.push('td_' + ri + '_' + ci);            }        }        clsettdtitle_uncrcolor();    }
-    //为取消标题的单元格设置样式并从内存中清除取消标题的单元格    function clsettdtitle_uncrcolor() {        for (var i = 0; i < tmp_pub_array.length; i++) {            document.getElementById(tmp_pub_array[i]).removeAttribute('style');            document.getElementById(tmp_pub_array[i]).setAttribute('td_oprsy', '0');            tmp_title_array.removeByValue(tmp_pub_array[i]);        }    }
-    //删除最后多余的分割符    function qhmrfh(strtxt, yqdfh) {        var newstrtxt;        if (strtxt.substr(strtxt.length - 1, 1) == yqdfh) {            newstrtxt = strtxt.substr(0, strtxt.length - 1);        }        return newstrtxt;    }
-    //去除所有空格    function removeAllSpace(str, lx) {        if (lx == 0) {            return str.replace(/\s+/g, '');        }        if (lx == 1) {            return str.replace(/,/g, '');        }    }
-    //转为json数组格式    function tabtojsonxx() {        return tabarrtomemarr();    }
-    function tabarrtomemarr() {        tmp_Table_array.splice(0, tmp_Table_array.length);        var lstm_x = new Array(), lstm_y = new Array();        var hs = gettbhlxx('Mzy_excelTable', 'col');        var ls = gettbhlxx('Mzy_excelTable', 'row');        for (var i = 1; i <= hs; i++) {            for (var b = 1; b <= ls; b++) {                if (removeAllSpace(document.getElementById('td_' + i + '_' + b).innerText, 0) != '') {                    tmp_Table_array.push('td_' + i + '_' + b);                    lstm_x.push(i);                    lstm_y.push(b);                }            }        }        var np_x1 = lstm_x.min(), np_x2 = lstm_x.max();        var np_y1 = lstm_y.min(), np_y2 = lstm_y.max();        var temp_str1 = '', temp_str2 = '', temp_zhstr1 = '', temp_zhstr2 = '';        for (var i = np_x1; i <= np_x2; i++) {            //横向            for (var b = np_y1; b <= np_y2; b++) {                if (document.getElementById('td_' + i + '_' + b).getAttribute('td_oprsy') == '9') {                    temp_str1 = temp_str1 + '\"' + document.getElementById('td_' + i + '_' + b).innerText + '\",';                } else {                    temp_str2 = temp_str2 + document.getElementById('td_' + i + '_' + b).innerText + ',';                }            }            if (removeAllSpace(temp_str1, 1) != '' && removeAllSpace(temp_str2, 1) != '') {                temp_zhstr1 = temp_zhstr1 + '{name:' + qhmrfh(temp_str1, ',') + ',value:' + qhmrfh(temp_str2, ',') + '},';            }            temp_str1 = '';            temp_str2 = '';        }        for (var i = np_y1; i <= np_y2; i++) {            //纵向            for (var b = np_x1; b <= np_x2; b++) {                if (document.getElementById('td_' + b + '_' + i).getAttribute('td_oprsy') == '9') {                    temp_str1 = temp_str1 + '\"' + document.getElementById('td_' + b + '_' + i).innerText + '\",';                } else {                    temp_str2 = temp_str2 + document.getElementById('td_' + b + '_' + i).innerText + ',';                }            }            if (removeAllSpace(temp_str1, 1) != '' && removeAllSpace(temp_str2, 1) != '') {                temp_zhstr1 = temp_zhstr1 + '{name:' + qhmrfh(temp_str1, ',') + ',value:' + qhmrfh(temp_str2, ',') + '},';            }            temp_str1 = '';            temp_str2 = '';        }        return qhmrfh(temp_zhstr1, ',');    }        document.onkeydown = function () {            if (event.keyCode == 46) {                Mzynrdelopr();            }        }
-    function Mzynrdelopr() {        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {                document.getElementById('td_' + ri + '_' + ci).innerHTML = '';            }        }    }</script>
-<script type="text/javascript" language="JavaScript">    MzyCreateTable('tb_box', 20, 15, 100);</script></html>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+<div id="top_menu"
+     style="border: 1px solid #C0C0C0; padding: 2px; background-color: #EFFBCC;height:20px;line-height:20px;text-align:center;">
+    <div id="top_menu_m1" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="settdtitle();this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        设置标题
+    </div>
+    <div id="top_menu_m2" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="clsettdtitle();this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        取消标题
+    </div>
+    <div id="top_menu_m3" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="document.getElementById('jsontextxx').innerText=tabtojsonxx();this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        转为json数组
+    </div>
+    <div id="top_menu_m4" onmousemove="this.style.backgroundColor = '#F4FFFE';"
+         onmouseout="this.style.backgroundColor = '#F7F8E9';" onmouseup="this.style.backgroundColor = '#F7F8E9';"
+         onmousedown="var awin=window.open('about:blank','newwindow','height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');awin.document.write(document.getElementById('jsontextxx').innerHTML);this.style.backgroundColor = '#FFFFCA';"
+         style="position: relative;float:left;width: 80px;border: 1px groove #C0C0C0; background-color: #F7F8E9;height:18px;line-height:18px;text-align:center;vertical-align:middle;margin-right:4px;cursor: default;">
+        查看json数组
+    </div>
+</div>
+<div style="width:0px; height:0px; display: none;" id="jsontextxx"></div>
+<div id="tb_box"></div>
+
+</body>
+<script type="text/javascript" language="JavaScript">
+    function pdiellq() {
+        //测试浏览器类型
+        var Sys = {};
+        var ua = navigator.userAgent.toLowerCase();
+        var s;
+        (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+            (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+                (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                            (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+        if (Sys.ie) {
+            if (Sys.ie.toString() == "6.0") {
+                return 6;
+            } else if (Sys.ie.toString() == "7.0") {
+                return 7;
+            } else if (Sys.ie.toString() == "8.0") {
+                return 8;
+            } else if (Sys.ie.toString() == "9.0") {
+                return 9;
+            } else if (Sys.ie.toString() == "10.0") {
+                return 10;
+            } else if (Sys.ie.toString() == "11.0") {
+                return 11;
+            }
+        } else if (Sys.firefox) {
+            return 0;
+        } else if (Sys.chrome) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    function MzyCrycprydiv() {
+        //画公用的隐藏层
+        var selDiv = document.createElement("div");
+        selDiv.style.cssText = "position: absolute; width: 0px; height: 0px; z-index: 999; left: 0px; top: 0px;margin:0px 0px 0px 0px;padding:0px;border-style: solid; border-width: 1px; background-color: #ECF9F9;word-wrap:break-word;justify-content:center;align-items:center;";
+        selDiv.id = "Mzy_sel_Div";
+        selDiv.style.display = 'none';
+        var selDisInput = document.createElement("div");
+        selDisInput.id = "Mzy_input";
+        selDisInput.style.cssText = 'position: absolute;top:0px;left:0px;margin:0px;padding:0px;width:100%;height:100%;';
+        selDisInput.setAttribute('contenteditable', 'true');
+        var selDisSbz = document.createElement("div");
+        selDisSbz.style.cssText = 'position:absolute;right:0px;bottom:0px;margin:0px 0px -1px 0px;padding:0px;cursor:crosshair;';
+        selDisSbz.id = 'Mzy_div_selbz';
+        selDisSbz.appendChild(document.createTextNode('◢'));
+        selDisSbz.onmousedown = function () {
+            MzySelnrhk(document.getElementById('Mzy_input').getAttribute('td_id'));
+        }
+        selDiv.appendChild(selDisInput);
+        selDiv.appendChild(selDisSbz);
+        document.getElementById("tb_box").appendChild(selDiv);
+        var puarraybox = document.createElement("textarea");
+        puarraybox.id = 'Pub_arr_strs';
+        puarraybox.setAttribute('hidden', 'hidden');
+        puarraybox.style.display = 'none';
+        document.getElementById("tb_box").appendChild(puarraybox);
+        var Tzlkzydiv = document.createElement("div");
+        Tzlkzydiv.id = "Mzy_Tzlkzydiv";
+        Tzlkzydiv.style.cssText = 'position: relative; width:0px; height:0px; z-index:90; float:right;margin:0px 0px 0px 0px;padding:0px;background-color: #808080;-moz-user-select:none;cursor:default;';
+        Tzlkzydiv.setAttribute('unselectable', 'on');
+        Tzlkzydiv.setAttribute('onselectstart', 'return false;');
+        document.getElementById("tb_box").appendChild(Tzlkzydiv);
+    }
+
+    function MzySelnrhk(jobid) {
+        var Mzy_inputbox = document.getElementById('Mzy_sel_Div');
+        Mzy_inputbox.style.filter = 'alpha(opacity:60)';
+        Mzy_inputbox.style.opacity = 0.6;
+        var maindiv = document.getElementById(jobid).parentNode.parentNode;
+        maindiv.onmousemove = function () {
+            MzySelnrhkMove(jobid);
+        }
+        Mzy_inputbox.onmouseup = function () {
+            var sel_Y_0 = parseInt(Mzy_inputbox.style.top);
+            var sel_Y_1 = parseInt(Mzy_inputbox.style.top) + parseInt(Mzy_inputbox.style.height) + parseInt(Mzy_inputbox.style.borderBottomWidth) + parseInt(Mzy_inputbox.style.borderTopWidth);
+            var sel_X_0 = parseInt(Mzy_inputbox.style.left);
+            var sel_X_1 = parseInt(Mzy_inputbox.style.left) + parseInt(Mzy_inputbox.style.width) + parseInt(Mzy_inputbox.style.borderLeftWidth) + parseInt(Mzy_inputbox.style.borderRightWidth);
+            maindiv.onmousemove = null;
+            maindiv.onmouseup = null;
+            Mzy_inputbox.style.top = '0px';
+            Mzy_inputbox.style.left = '0px';
+            Mzy_inputbox.style.width = '0px';
+            Mzy_inputbox.style.height = '0px';
+            Mzy_inputbox.style.display = 'none';
+        }
+    }
+
+    function MzySetinputbox(jobid) {
+        var Mzy_inputbox = document.getElementById('Mzy_sel_Div');
+        var Mzy_inputbox_input = document.getElementById('Mzy_input');
+        var stridxx = jobid.split("_");
+        if (parseInt(stridxx[1]) > 0 && parseInt(stridxx[2]) > 0) {
+            Mzy_inputbox.style.top = getElementTop(document.getElementById(jobid)) + 'px';
+            Mzy_inputbox.style.left = getElementLeft(document.getElementById(jobid)) + 'px';
+            Mzy_inputbox.style.width = (document.getElementById(jobid).offsetWidth - 2) + 'px';
+            Mzy_inputbox.style.height = (document.getElementById(jobid).offsetHeight - 2) + 'px';
+            Mzy_inputbox.style.display = Mzy_inputbox.parentNode.style.display;
+            Mzy_inputbox.style.filter = Mzy_inputbox.parentNode.style.filter;
+            Mzy_inputbox.style.opacity = Mzy_inputbox.parentNode.style.opacity;
+            Mzy_inputbox.style.fontSize = Mzy_inputbox.parentNode.style.fontSize;
+            Mzy_inputbox_input.style.width = (document.getElementById(jobid).offsetWidth - 2) + 'px';
+            Mzy_inputbox_input.style.height = (document.getElementById(jobid).offsetHeight - 2) + 'px';
+            Mzy_inputbox_input.style.display = Mzy_inputbox.parentNode.style.display;
+            Mzy_inputbox_input.setAttribute('td_id', jobid);
+            tdnrselRead(jobid);
+            Mzy_inputbox_input.focus();
+            Mzy_inputbox_input.onpaste = function () {
+                if (document.all) {
+                    window.event.returnValue = false;
+                } else {
+                    event.preventDefault();
+                }
+                intiTablePasteEvent();
+            }
+            Mzy_inputbox_input.onkeydown = function () {
+                var kzkeyarray = [36, 37, 38, 39, 40, 46];
+                if (jcarrayzv(kzkeyarray, event.keyCode)) {
+                    document.getElementById(jobid).innerHTML = Mzy_inputbox_input.innerHTML;
+                    Mzy_inputbox.style.display = '';
+                    document.getElementById(jobid).setAttribute('td_input', '0');
+                    MzySetinputbox_keyopr(jobid);
+                }
+            }
+            if (document.getElementById(jobid).getAttribute('td_input') == '0') {
+                Mzy_inputbox_input.innerHTML = document.getElementById(jobid).innerHTML;
+                document.getElementById(jobid).setAttribute('td_input', '1');
+                Mzy_inputbox_input.onblur = function () {
+                    document.getElementById(jobid).innerHTML = Mzy_inputbox_input.innerHTML;
+                    Mzy_inputbox_input.style.display = 'none';
+                    document.getElementById(jobid).setAttribute('td_input', '0');
+                }
+            }
+        } else {
+            Mzy_inputbox_input.style.display = '';
+        }
+    }
+
+    function MzySetinputbox_keyopr(jobidn) {
+        //列数
+        var Tb_allcols = gettbhlxx('Mzy_excelTable', 'col');
+        //行数
+        var Tb_allrows = gettbhlxx('Mzy_excelTable', 'row');
+        var strs1 = jobidn.split("_");
+        //向下
+        if (event.keyCode == 40) {
+            if (parseInt(strs1[1]) < Tb_allcols) {
+                var nxxid1 = "td_" + (parseInt(strs1[1]) + 1) + "_" + parseInt(strs1[2]);
+                MzySetinputbox(nxxid1);
+            }
+        }
+        //向右
+        if (event.keyCode == 39) {
+            if (parseInt(strs1[2]) < Tb_allrows) {
+                var nxxid1 = "td_" + parseInt(strs1[1]) + "_" + (parseInt(strs1[2]) + 1);
+                MzySetinputbox(nxxid1);
+            }
+        }
+        //向上
+        if (event.keyCode == 38) {
+            if (parseInt(strs1[1]) > 0) {
+                var nxxid1 = "td_" + (parseInt(strs1[1]) - 1) + "_" + parseInt(strs1[2]);
+                MzySetinputbox(nxxid1);
+            }
+        }
+        //向左
+        if (event.keyCode == 37) {
+            if (parseInt(strs1[2]) > 0) {
+                var nxxid1 = "td_" + parseInt(strs1[1]) + "_" + (parseInt(strs1[2]) - 1);
+                MzySetinputbox(nxxid1);
+            }
+        }
+        //删除键
+        if (event.keyCode == 46) {
+            document.getElementById(jobidn).innerHTML = '';
+            MzySetinputbox(jobidn);
+        }
+        if ((event.ctrlKey) && (event.keyCode == 36)) {
+            MzySetinputbox("td_1_1");
+        }
+    }
+
+    function MzySelnrhkMove(jobid) {
+        var Mzy_inputbox = document.getElementById('Mzy_sel_Div');
+        Mzy_inputbox.style.top = getElementTop(document.getElementById(jobid)) + 'px';
+        Mzy_inputbox.style.left = getElementLeft(document.getElementById(jobid)) + 'px';
+        Mzy_inputbox.style.width = (document.getElementById(jobid).offsetWidth - 2) + 'px';
+        Mzy_inputbox.style.height = (document.getElementById(jobid).offsetHeight - 2) + 'px';
+        Mzy_inputbox.style.display = '';
+        var evt = window.event || arguments[0];
+        var startX = parseInt(Mzy_inputbox.style.left);
+        var startY = parseInt(Mzy_inputbox.style.top);
+        var _x = null;
+        var _y = null;
+        _x = (evt.x || evt.clientX);
+        _y = (evt.y || evt.clientY);
+        var thebgmaxwidth = document.getElementById("Mzy_excelTable").offsetWidth;
+        var thebgmaxheight = document.getElementById("Mzy_excelTable").offsetHeight;
+        if (_x < thebgmaxwidth && _y < thebgmaxheight) {
+            Mzy_inputbox.style.left = Math.min(_x, startX) + "px";
+            Mzy_inputbox.style.top = Math.min(_y, startY) + "px";
+            Mzy_inputbox.style.width = Math.abs(_x - startX) + "px";
+            Mzy_inputbox.style.height = Math.abs(_y - startY) + "px";
+        }
+    }
+
+    function getElementLeft(element) {
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+        while (current !== null) {
+            actualLeft += parseInt(current.offsetLeft) + parseInt(current.style.borderLeftWidth | current.border) + parseInt(current.style.borderRightWidth | current.border);
+            current = current.offsetParent;
+        }
+        return actualLeft;
+    }
+
+    function getElementTop(element) {
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+        while (current !== null) {
+            actualTop += parseInt(current.offsetTop) + parseInt(current.style.borderTopWidth | current.border) + parseInt(current.style.borderBottomWidth | current.border);
+            current = current.offsetParent;
+        }
+        return actualTop;
+    }
+
+    //检测数组中是否有要查的数
+    function jcarrayzv(arraynu, mbnu) {
+        var zdbz = 0;
+        for (var i = 0; i < arraynu.length; i++) {
+            if (arraynu[i] == mbnu) {
+                zdbz++;
+                break;
+            }
+        }
+        if (zdbz > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //====== 画表格专用函数 ======== Begin //
+    function MzyCreateTable(rqdivid, rowNums, colNums, rowWidths) {
+        addCssByStyle();
+        MzyCrycprydiv();
+        var Mzy_table = document.createElement("table");
+        Mzy_table.id = "Mzy_excelTable";
+        Mzy_table.border = 0;
+        Mzy_table.cellPadding = 0;
+        Mzy_table.style.width = (colNums * rowWidths) + 'px';
+        Mzy_table.cellSpacing = 0;
+        document.getElementById(rqdivid).appendChild(Mzy_table);
+        for (ri = 0; ri < colNums; ri++) {
+            var Mzy_tr = document.createElement("tr");
+            Mzy_tr.id = 'tr_' + ri;
+            Mzy_table.appendChild(Mzy_tr);
+            for (ci = 0; ci < rowNums; ci++) {
+                var td_lx_pd = 0;
+                var tdmc = 'td';
+                var tdwnu = rowWidths;
+                var tdvalue = '';
+                if (ri < 1 || ci < 1) {
+                    td_lx_pd = 1;
+                    tdmc = 'th';
+                    if (ci == 0) {
+                        tdwnu = 20;
+                    }
+                }
+                if (ri == 0 && ci > 0) {
+                    tdvalue = MzyGettitle(ci);
+                }
+                if (ri > 0 && ci == 0) {
+                    tdvalue = ri;
+                }
+                var Mzy_td = document.createElement(tdmc);
+                Mzy_td.id = tdmc + '_' + ri + '_' + ci;
+                Mzy_td.style.width = tdwnu + 'px';
+                Mzy_td.setAttribute('td_lx', td_lx_pd);
+                Mzy_td.setAttribute('td_input', '0');
+                Mzy_td.setAttribute('td_oprsy', '0');
+                if (ri == 0 && ci > 0) {
+                    //鼠标拉动列宽
+                    var Mzy_titdivtd = document.createElement('div');
+                    Mzy_titdivtd.style.cssText = 'float: left;width:99.9%;text-align:center;-moz-user-select:none;';
+                    Mzy_titdivtd.id = 'toptitlebox' + ri + '_' + ci;
+                    Mzy_td.appendChild(Mzy_titdivtd);
+                    var Mzy_titdivtd_mu = document.createElement('div');
+                    Mzy_titdivtd_mu.style.cssText = 'width:0.1%;float:right;cursor:w-resize;filter:alpha(opacity:0);opacity:0;-moz-user-select:none;';
+                    Mzy_titdivtd_mu.id = 'titmubs' + ri + '_' + ci;
+                    Mzy_titdivtd_mu.appendChild(document.createTextNode('|'));
+                    Mzy_titdivtd.setAttribute('unselectable', 'on');
+                    Mzy_titdivtd.setAttribute('onselectstart', 'return false;');
+                    Mzy_titdivtd_mu.setAttribute('unselectable', 'on');
+                    Mzy_titdivtd_mu.setAttribute('onselectstart', 'return false;');
+                    Mzy_td.appendChild(Mzy_titdivtd_mu);
+                    Mzy_titdivtd_mu.setAttribute('onmousedown', 'chancolwidthread(this.parentNode.id)');
+                }
+                Mzy_td.onclick = function () {
+                    //选择表单元格
+                    MzySetinputbox(this.id);
+                }
+                if (ri > 0 && ci > 0) {
+                    Mzy_td.onmousemove = function () {
+                        tdnrselRead(this.id);
+                    }
+                    Mzy_td.onmousedown = function () {
+                        tdnrselReadDown(this.id);
+                    }
+                    Mzy_td.onmouseup = function () {
+                        qxbz++;
+                    }
+                }
+                if (ri == 0 && ci > 0) {
+                    Mzy_titdivtd.appendChild(document.createTextNode(tdvalue));
+                } else {
+                    Mzy_td.appendChild(document.createTextNode(tdvalue));
+                }
+                Mzy_tr.appendChild(Mzy_td);
+            }
+        }
+    }
+
+    var zbgzzt = 0;
+
+    function chancolwidthread(tobjid) {
+        var zbgzzt = 1;
+        Puydcgl(tobjid);
+        document.body.onmousemove = function () {
+            if (zbgzzt == 1) {
+                document.getElementById('Mzy_Tzlkzydiv').style.cursor = 'w-resize';
+                MzyLKLdmove();
+            }
+        }
+        document.body.onmouseup = function () {
+            if (zbgzzt == 1) {
+                document.getElementById('Mzy_Tzlkzydiv').style.cursor = 'default';
+                MzyLKLdup(tobjid);
+                zbgzzt = 0;
+            }
+        }
+    }
+
+    function Puydcgl(mbobjid) {
+        //运动层管理
+        var old_top, old_left, old_width, old_height;
+        old_top = getElementTop(document.getElementById(mbobjid));
+        old_left = getElementLeft(document.getElementById(mbobjid));
+        old_width = document.getElementById(mbobjid).offsetWidth;
+        old_height = document.getElementById(mbobjid).offsetHeight;
+        document.getElementById('Mzy_Tzlkzydiv').style.top = old_top + 'px';
+        document.getElementById('Mzy_Tzlkzydiv').style.left = old_left + 'px';
+        document.getElementById('Mzy_Tzlkzydiv').style.width = old_width + 'px';
+        document.getElementById('Mzy_Tzlkzydiv').style.height = old_height + 'px';
+        document.getElementById('Mzy_Tzlkzydiv').style.position = 'absolute';
+        document.getElementById('Mzy_Tzlkzydiv').style.backgroundColor = '#808080';
+        document.getElementById('Mzy_Tzlkzydiv').style.filter = 'alpha(opacity:60)';
+        document.getElementById('Mzy_Tzlkzydiv').style.opacity = 0.6;
+        document.getElementById('Mzy_Tzlkzydiv').style.display = '';
+        document.getElementById('Mzy_sel_Div').style.display = 'none';
+    }
+
+    function MzyLKLdmove() {
+        var oldleft = getElementLeft(document.getElementById('Mzy_Tzlkzydiv'));
+        var evt = window.event || arguments[0];
+        var mov_x = (evt.x || evt.clientX);
+        if (!mov_x) {
+            return false;
+        }
+        nwid = (parseInt(mov_x) - parseInt(oldleft));
+        if (nwid < 0) {
+            nwid = parseInt(document.getElementById('Mzy_Tzlkzydiv').offsetWidth);
+        }
+        document.getElementById('Mzy_Tzlkzydiv').style.width = nwid + 'px';
+    }
+
+    function MzyLKLdup(mbobjid) {
+        var sjobj = document.getElementById(mbobjid);
+        var oldtdwidth = sjobj.offsetWidth;
+        var zjorjsv = parseInt(document.getElementById('Mzy_Tzlkzydiv').style.width) - parseInt(oldtdwidth);
+        var maintabwidthold = parseInt(document.getElementById('Mzy_excelTable').offsetWidth);
+        sjobj.style.width = parseInt(document.getElementById('Mzy_Tzlkzydiv').style.width) + 'px';
+        document.getElementById('Mzy_excelTable').style.width = (maintabwidthold + zjorjsv) + 'px';
+        document.getElementById('Mzy_Tzlkzydiv').style.top = '0px';
+        document.getElementById('Mzy_Tzlkzydiv').style.left = '0px';
+        document.getElementById('Mzy_Tzlkzydiv').style.width = '0px';
+        document.getElementById('Mzy_Tzlkzydiv').style.display = 'none';
+    }
+
+
+    //表格专用样式生成
+    function addCssByStyle() {
+        var Mzy_tbstyle_str = "*{font-family:arial;font-size:8pt;margin:0px 0px 0px 0px;padding:0px;}\n" +
+            "table{border:1px solid #7e7d68;margin-right:-1000px;}\n" +
+            "th{background-color:#efebde;border-right-width:1px;border-bottom-width:1px;border-right-style:solid;border-bottom-style:solid;border-right-color:#7e7d68;border-bottom-color:#7e7d68;font-weight:normal;color:black;height:24px;line-height:24px;cursor:default}\n" +
+            "td{border-right-width:1px;border-bottom-width:1px;border-top-style:none;border-right-style:solid;border-bottom-style:solid;border-left-style:none;border-right-color:#c0c0c0;border-bottom-color:#c0c0c0;cursor:text;padding:0;}\n" +
+            ".seld{border: 1px ridge #EEEEEE;background: #ecf9f9;}\n" +
+            "\n";
+        var doc = document;
+        var style = doc.createElement("style");
+        style.setAttribute("type", "text/css");
+        if (style.styleSheet) {// IE
+            style.styleSheet.cssText = Mzy_tbstyle_str;
+        } else {// w3c
+            var cssText = doc.createTextNode(Mzy_tbstyle_str);
+            style.appendChild(cssText);
+        }
+        var heads = doc.getElementsByTagName("head");
+        if (heads.length)
+            heads[0].appendChild(style);
+        else
+            doc.documentElement.appendChild(style);
+    }
+
+    //获取类excel表头序号的字符
+    function MzyGettitle(numv) {
+        var tni = numv;
+        var tmi = 0;
+        var tm_str = '';
+        while (tni > 0) {
+            tmi = tni % 26;
+            tni = parseInt(tni / 26);
+            if (tmi == 0) {
+                tmi = 26;
+                tni--;
+            }
+            tm_str = String.fromCharCode(tmi + "A".charCodeAt(0) - 1) + tm_str;
+        }
+        return tm_str;
+    }
+
+    //获取表格内容里的行数和列数
+    function gettbhlxx(tbid, lx) {
+
+        if (lx == 'col') {
+            //取表列数
+            return document.getElementById(tbid).getElementsByTagName('tr').length - 1;
+        }
+
+        if (lx == 'row') {
+            //取表行数
+            return document.getElementById(tbid).getElementsByTagName('tr')[1].getElementsByTagName('td').length;
+        }
+    }
+
+
+    //执行粘贴监听
+    function intiTablePasteEvent() {
+        var sfiebz = pdiellq();
+        if (sfiebz > 1) {
+            var txt = window.clipboardData.getData('text');//for IE
+        } else {
+            var txt = event.clipboardData.getData('text') || window.clipboardData.getData('text');
+        }
+
+        if (!txt) {
+            return false;
+        }
+        while (txt.length > 0) {
+            var c = txt.charAt(txt.length - 1);
+            if (c == '\n' || c == '\r' || c == '\t') {
+                txt = txt.substring(0, txt.length - 1);
+            } else {
+                break;
+            }
+        }
+        var pos = txt.indexOf("\n");
+        if (pos < 0) {
+            pos = txt.indexOf("\t");
+            if (pos < 0) return true;
+        }
+        var re = /\r/g;
+        txt = txt.replace(re, "");
+        var prows = txt.split("\n");
+        var data = new Array();
+        for (var i = 0; i < prows.length; i++) {
+            data[i] = prows[i].split("\t");
+        }
+        var stridxx = document.getElementById('Mzy_input').getAttribute('td_id').split("_");
+        var csh_row = stridxx[1];
+        var csh_col = stridxx[2];
+        var tbg_cols = gettbhlxx('Mzy_excelTable', 'row');
+        var tbg_rows = gettbhlxx('Mzy_excelTable', 'col');
+        document.getElementById('Mzy_input').innerHTML = data[0][0];
+        document.getElementById('Mzy_sel_Div').style.display = 'none';
+        for (var rii = 0, ri = csh_row; rii < data.length && ri <= tbg_rows; rii++, ri++) {
+            for (var cii = 0, ci = csh_col; cii < data[0].length && ci <= tbg_cols; cii++, ci++) {
+                document.getElementById('td_' + ri + '_' + ci).innerHTML = data[rii][cii];
+            }
+        }
+    }
+
+    //====== 画表格专用函数 ======== End //
+
+    //====== 表格单元格操作内存控制 ======== begin //
+    var p_x = new Array();
+    var p_y = new Array();
+    var tmp_pub_array = new Array();
+    var tmp_title_array = new Array();
+    var tmp_Table_array = new Array();
+    var qxbz = 1;
+
+    function tdnrselRead(objid) {
+        if (qxbz < 1) {
+            document.getElementById('Mzy_sel_Div').style.display = 'none';
+            Mzyjldzarray(objid);
+            hxzrtd();
+        }
+    }
+
+    function tdnrselReadDown(objid) {
+        qxbz = 0;
+        if (!event.ctrlKey) {
+            clyhxx();
+            p_x.splice(0, p_x.length);
+            p_y.splice(0, p_y.length);
+        }
+        Mzyjlddxar(objid);
+        document.getElementById(objid).className = 'seld';
+    }
+
+    function Mzyjldzarray(objid) {
+        var tepstra = objid.split("_");
+        if (p_x.indexOf(tepstra[1]) < 0) {
+            p_x.push(tepstra[1]);
+        }
+        if (p_y.indexOf(tepstra[2]) < 0) {
+            p_y.push(tepstra[2]);
+        }
+        if (parseInt(tepstra[1]) < p_x.max()) {
+            clyhxx();
+            p_x.removeByValue(p_x.max());
+        }
+        if (parseInt(tepstra[2]) < p_y.max()) {
+            clyhxx();
+            p_y.removeByValue(p_y.max());
+        }
+    }
+
+    function Mzyjlddxar(objid) {
+        var tepstra = objid.split("_");
+        if (p_x.indexOf(tepstra[1]) < 0) {
+            p_x.push(tepstra[1]);
+        }
+        if (p_y.indexOf(tepstra[2]) < 0) {
+            p_y.push(tepstra[2]);
+        }
+    }
+
+    function clyhxx() {
+        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {
+            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {
+                document.getElementById('td_' + ri + '_' + ci).className = '';
+            }
+        }
+
+    }
+
+    Array.prototype.removeByValue = function (val) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == val) {
+                this.splice(i, 1);
+                break;
+            }
+        }
+    }
+    Array.prototype.max = function () {
+        return Math.max.apply({}, this)
+    }
+    Array.prototype.min = function () {
+        return Math.min.apply({}, this)
+    }
+
+    function hxzrtd() {
+        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {
+            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {
+                document.getElementById('td_' + ri + '_' + ci).className = 'seld';
+            }
+        }
+    }
+
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (searchElement, fromIndex) {
+            var k;
+            if (this == null) {
+                throw new TypeError('"this" is null or not defined');
+            }
+            var O = Object(this);
+            var len = O.length >>> 0;
+            if (len === 0) {
+                return -1;
+            }
+            var n = +fromIndex || 0;
+            if (Math.abs(n) === Infinity) {
+                n = 0;
+            }
+            if (n >= len) {
+                return -1;
+            }
+            k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+            while (k < len) {
+                if (k in O && O[k] === searchElement) {
+                    return k;
+                }
+                k++;
+            }
+            return -1;
+        };
+    }
+
+
+    //====== 表格单元格操作内存控制 ======== end //
+
+
+    //将选定的单元格设置为标题单元
+    function settdtitle() {
+        tmp_pub_array.splice(0, tmp_pub_array.length);
+        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {
+            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {
+                tmp_pub_array.push('td_' + ri + '_' + ci);
+            }
+        }
+        settdtitle_crcolor();
+        tmp_title_array.push(tmp_pub_array);
+    }
+
+    //为选定的单元格设置样式
+    function settdtitle_crcolor() {
+        for (var i = 0; i < tmp_pub_array.length; i++) {
+            document.getElementById(tmp_pub_array[i]).style.fontFamily = 'Arial Black';
+            document.getElementById(tmp_pub_array[i]).style.color = '#CC3300';
+            document.getElementById(tmp_pub_array[i]).style.fontStyle = 'oblique';
+            document.getElementById(tmp_pub_array[i]).style.borderBottom = '2px dotted #FF0000';
+            document.getElementById(tmp_pub_array[i]).setAttribute('td_oprsy', '9');
+        }
+    }
+
+    //取消标题单元设置
+    function clsettdtitle() {
+        tmp_pub_array.splice(0, tmp_pub_array.length);
+        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {
+            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {
+                tmp_pub_array.push('td_' + ri + '_' + ci);
+            }
+        }
+        clsettdtitle_uncrcolor();
+    }
+
+    //为取消标题的单元格设置样式并从内存中清除取消标题的单元格
+    function clsettdtitle_uncrcolor() {
+        for (var i = 0; i < tmp_pub_array.length; i++) {
+            document.getElementById(tmp_pub_array[i]).removeAttribute('style');
+            document.getElementById(tmp_pub_array[i]).setAttribute('td_oprsy', '0');
+            tmp_title_array.removeByValue(tmp_pub_array[i]);
+        }
+    }
+
+    //删除最后多余的分割符
+    function qhmrfh(strtxt, yqdfh) {
+        var newstrtxt;
+        if (strtxt.substr(strtxt.length - 1, 1) == yqdfh) {
+            newstrtxt = strtxt.substr(0, strtxt.length - 1);
+        }
+        return newstrtxt;
+    }
+
+    //去除所有空格
+    function removeAllSpace(str, lx) {
+        if (lx == 0) {
+            return str.replace(/\s+/g, '');
+        }
+        if (lx == 1) {
+            return str.replace(/,/g, '');
+        }
+    }
+
+    //转为json数组格式
+    function tabtojsonxx() {
+        return tabarrtomemarr();
+    }
+
+
+    function tabarrtomemarr() {
+        tmp_Table_array.splice(0, tmp_Table_array.length);
+        var lstm_x = new Array(), lstm_y = new Array();
+        var hs = gettbhlxx('Mzy_excelTable', 'col');
+        var ls = gettbhlxx('Mzy_excelTable', 'row');
+        for (var i = 1; i <= hs; i++) {
+            for (var b = 1; b <= ls; b++) {
+                if (removeAllSpace(document.getElementById('td_' + i + '_' + b).innerText, 0) != '') {
+                    tmp_Table_array.push('td_' + i + '_' + b);
+                    lstm_x.push(i);
+                    lstm_y.push(b);
+                }
+            }
+        }
+        var np_x1 = lstm_x.min(), np_x2 = lstm_x.max();
+        var np_y1 = lstm_y.min(), np_y2 = lstm_y.max();
+        var temp_str1 = '', temp_str2 = '', temp_zhstr1 = '', temp_zhstr2 = '';
+        for (var i = np_x1; i <= np_x2; i++) {
+            //横向
+            for (var b = np_y1; b <= np_y2; b++) {
+                if (document.getElementById('td_' + i + '_' + b).getAttribute('td_oprsy') == '9') {
+                    temp_str1 = temp_str1 + '\"' + document.getElementById('td_' + i + '_' + b).innerText + '\",';
+                } else {
+                    temp_str2 = temp_str2 + document.getElementById('td_' + i + '_' + b).innerText + ',';
+                }
+            }
+            if (removeAllSpace(temp_str1, 1) != '' && removeAllSpace(temp_str2, 1) != '') {
+                temp_zhstr1 = temp_zhstr1 + '{name:' + qhmrfh(temp_str1, ',') + ',value:' + qhmrfh(temp_str2, ',') + '},';
+            }
+            temp_str1 = '';
+            temp_str2 = '';
+        }
+        for (var i = np_y1; i <= np_y2; i++) {
+            //纵向
+            for (var b = np_x1; b <= np_x2; b++) {
+                if (document.getElementById('td_' + b + '_' + i).getAttribute('td_oprsy') == '9') {
+                    temp_str1 = temp_str1 + '\"' + document.getElementById('td_' + b + '_' + i).innerText + '\",';
+                } else {
+                    temp_str2 = temp_str2 + document.getElementById('td_' + b + '_' + i).innerText + ',';
+                }
+            }
+            if (removeAllSpace(temp_str1, 1) != '' && removeAllSpace(temp_str2, 1) != '') {
+                temp_zhstr1 = temp_zhstr1 + '{name:' + qhmrfh(temp_str1, ',') + ',value:' + qhmrfh(temp_str2, ',') + '},';
+            }
+            temp_str1 = '';
+            temp_str2 = '';
+        }
+        return qhmrfh(temp_zhstr1, ',');
+    }
+        document.onkeydown = function () {
+            if (event.keyCode == 46) {
+                Mzynrdelopr();
+            }
+        }
+
+    function Mzynrdelopr() {
+        for (var ri = p_x.min(); ri <= p_x.max(); ri++) {
+            for (var ci = p_y.min(); ci <= p_y.max(); ci++) {
+                document.getElementById('td_' + ri + '_' + ci).innerHTML = '';
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript" language="JavaScript">
+    MzyCreateTable('tb_box', 20, 15, 100);
+</script>
+</html>
